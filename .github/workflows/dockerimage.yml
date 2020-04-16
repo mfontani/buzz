@@ -23,13 +23,9 @@ jobs:
           DOCKER_REGISTRY_URL: docker.pkg.github.com
           DOCKER_USERNAME: ${{ github.actor }}
           DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-      - name: Re-tag the alpine image
-        run: docker tag docker.pkg.github.com/mfontani/buzz/alpine mfontani/buzz
       - name: Login to Docker.io Package Registry
         run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.DOCKER_LOGIN }}" --password-stdin
-      - name: Publish the alpine image
+      - name: Re-tag the alpine image for docker.io
+        run: docker tag docker.pkg.github.com/mfontani/buzz/alpine mfontani/buzz
+      - name: Publish the alpine image to docker.io
         run: docker push mfontani/buzz
-        env:
-          DOCKER_REGISTRY_URL: docker.pkg.github.com
-          DOCKER_USERNAME: ${{ secrets.DOCKER_LOGIN }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
