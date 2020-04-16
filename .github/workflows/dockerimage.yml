@@ -1,0 +1,25 @@
+---
+name: docker image
+on:
+  push:
+    branch: master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build the alpine image
+        run: docker build --file ./Dockerfile.alpine --tag docker.pkg.github.com/mfontani/buzz/alpine .
+        env:
+          DOCKER_REGISTRY_URL: docker.pkg.github.com
+          DOCKER_USERNAME: ${{ github.actor }}
+          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+      - name: Login to GitHub Package Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u "${{ github.actor }}" --password-stdin
+      - name: Publish the alpine image
+        run: docker push docker.pkg.github.com/mfontani/buzz/alpine
+        env:
+          DOCKER_REGISTRY_URL: docker.pkg.github.com
+          DOCKER_USERNAME: ${{ github.actor }}
+          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,71 @@
+#!/usr/bin/perl
+# Copyright 2018-2020 Marco Fontani <MFONTANI@cpan.org>
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its contributors
+#    may be used to endorse or promote products derived from this software
+#    without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+use strict;
+use warnings;
+
+# README: muffle-env
+#
+# Replaces _all_ environment variable _values_ with their _name_, in the format
+# `{{NAME}}`, i.e. for env var `FOO=BAR` it'd show `blah {{FOO}} baz` for the
+# given string `blah BAR baz`.
+# If parameters are given, it only performs the replacement for environment
+# variable _names_ which match any of the regexes given as parameters.
+# Note this may end up substituting parts of values of other environment
+# variables which wouldn't otherwise be matched.
+#
+# Useful to ensure a log file or log output doesn't end up containing any
+# sensitive secret which is present in the environment.
+# Just add it at the end of a pipe.
+#
+# Usage:
+#
+# - `env | muffle-env`
+# - `git push origin master:master 2>&1 | muffle-env '^SSH_'`
+
+my %env = map { $_ => '' } keys %ENV;
+if (@ARGV) {
+    my @keys = keys %env;
+    for my $k (@keys) {
+        delete $env{$k}
+            if !scalar grep { $k =~ m!$_!xms } @ARGV;
+    }
+}
+
+my @RENV =
+    reverse
+    map { [ $ENV{$_} => $_ ] }
+    sort { length $ENV{$a} <=> length $ENV{$b} }
+    keys %env;
+
+while (my $line = <STDIN>) {
+    for my $env (@RENV) {
+        $line =~ s!\Q$env->[0]\E!{{$env->[1]}}!gxms;
+    }
+    print $line;
+}
