@@ -11,18 +11,10 @@ jobs:
       - uses: actions/checkout@v1
       - name: Build the alpine image
         run: docker build --file ./Dockerfile.alpine --tag docker.pkg.github.com/mfontani/buzz/alpine .
-        env:
-          DOCKER_REGISTRY_URL: docker.pkg.github.com
-          DOCKER_USERNAME: ${{ github.actor }}
-          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
       - name: Login to GitHub Package Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u "${{ github.actor }}" --password-stdin
       - name: Publish the alpine image
         run: docker push docker.pkg.github.com/mfontani/buzz/alpine
-        env:
-          DOCKER_REGISTRY_URL: docker.pkg.github.com
-          DOCKER_USERNAME: ${{ github.actor }}
-          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
       - name: Login to Docker.io Package Registry
         run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.DOCKER_LOGIN }}" --password-stdin
       - name: Re-tag the alpine image for docker.io
