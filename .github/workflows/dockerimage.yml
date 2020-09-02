@@ -10,14 +10,14 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Build the alpine image
-        run: docker build --file ./Dockerfile.alpine --tag docker.pkg.github.com/mfontani/buzz/alpine .
+        run: docker build --file ./Dockerfile.alpine --tag ghcr.io/mfontani/buzz/alpine .
       - name: Login to GitHub Package Registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u "${{ github.actor }}" --password-stdin
+        run: echo "${{ secrets.GH_REGISTRY_RW_PAT }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
       - name: Publish the alpine image
-        run: docker push docker.pkg.github.com/mfontani/buzz/alpine
+        run: docker push ghcr.io/mfontani/buzz/alpine
       - name: Login to Docker.io Package Registry
         run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.DOCKER_LOGIN }}" --password-stdin
       - name: Re-tag the alpine image for docker.io
-        run: docker tag docker.pkg.github.com/mfontani/buzz/alpine mfontani/buzz
+        run: docker tag ghcr.io/mfontani/buzz/alpine mfontani/buzz
       - name: Publish the alpine image to docker.io
         run: docker push mfontani/buzz
