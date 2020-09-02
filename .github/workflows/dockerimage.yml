@@ -1,6 +1,6 @@
 ---
 name: docker image
-on:
+"on":
   push:
     branch: master
 
