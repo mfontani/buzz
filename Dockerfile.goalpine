@@ -1,0 +1,15 @@
+# vim: set filetype=dockerfile :
+# docker inspect --format='{{index .RepoDigests 0}}' golang:1.15-alpine
+FROM golang@sha256:49b4eac11640066bc72c74b70202478b7d431c7d8918e0973d6e4aeb8b3129d2
+
+COPY ./muffle-env /bin/muffle-env
+
+# hadolint ignore=DL3018
+RUN chmod +x /bin/muffle-env && \
+  apk --no-cache add \
+    git perl ca-certificates curl \
+    openssh-client rsync \
+    gcc musl-dev util-linux-dev \
+  && rm -rf /var/cache/apk/*
+
+ENTRYPOINT ["/bin/sh"]
