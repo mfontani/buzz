@@ -9,15 +9,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Build the alpine image
-        run: docker build --file ./Dockerfile.alpine --tag ghcr.io/mfontani/buzz/alpine .
-      - name: Login to GitHub Package Registry
-        run: echo "${{ secrets.GH_REGISTRY_RW_PAT }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
-      - name: Publish the alpine image
-        run: docker push ghcr.io/mfontani/buzz/alpine
+      - name: Build the buzz alpine image
+        #run: docker build --file ./Dockerfile.alpine --tag ghcr.io/mfontani/buzz/alpine .
+        run: docker build --file ./Dockerfile.alpine --tag mfontani/buzz .
+      - name: Build the gobuzz alpine image
+        #run: docker build --file ./Dockerfile.goalpine --tag ghcr.io/mfontani/gobuzz/alpine .
+        run: docker build --file ./Dockerfile.goalpine --tag mfontani/gobuzz .
+      #- name: Login to GitHub Package Registry
+      #  run: echo "${{ secrets.GH_REGISTRY_RW_PAT }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+      #- name: Publish the buzz alpine image
+      #  run: docker push ghcr.io/mfontani/buzz/alpine
+      #- name: Publish the gobuzz alpine image
+      #  run: docker push ghcr.io/mfontani/gobuzz/alpine
       - name: Login to Docker.io Package Registry
         run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.DOCKER_LOGIN }}" --password-stdin
-      - name: Re-tag the alpine image for docker.io
-        run: docker tag ghcr.io/mfontani/buzz/alpine mfontani/buzz
-      - name: Publish the alpine image to docker.io
+      #- name: Re-tag the buzz alpine image for docker.io
+      #  run: docker tag ghcr.io/mfontani/buzz/alpine mfontani/buzz
+      #- name: Re-tag the gobuzz alpine image for docker.io
+      #  run: docker tag ghcr.io/mfontani/gobuzz/alpine mfontani/gobuzz
+      - name: Publish the buzz alpine image to docker.io
         run: docker push mfontani/buzz
+      - name: Publish the gobuzz alpine image to docker.io
+        run: docker push mfontani/gobuzz
