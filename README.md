@@ -3,9 +3,8 @@
 ... is the sound a [drone](https://drone.io/) makes.
 
 This repository contains a `Dockerfile.alpine`, which is used to create/build a
-`alpine`-based docker image which is then published, via github actions, to the
-github package repository and on docker hub, at
-[mfontani/buzz](https://hub.docker.com/r/mfontani/buzz)
+`alpine`-based docker image which is then published via github actions to the
+docker hub, at [mfontani/buzz](https://hub.docker.com/r/mfontani/buzz)
 
 The image is fairly lean, and it contains Just Enough for allowing a user to
 perform common CI/CD operations, like using `curl` to fetch or trigger
@@ -28,13 +27,20 @@ found, fixing a pet peeve of mine whereby a plugin for `git push`'ing or
 server name or IP in the command's invocation, but the command itself would in
 turn output the un-asterisked value.
 
+Additionally, the `Dockerfile.goalpine` contains a similar image, but based on
+the most recent `golang:*-alpine`. In addition to `muffle-env`, this image also
+includes useful packages used to build static golang binaries.
+This is also published via github actions to the docker hub at
+[mfontani/gobuzz](https://hub.docker.com/r/mfontani/gobuzz)
+
+
 # Author
 
 Marco Fontani - <MFONTANI@cpan.org> - https://marcofontani.it/ - https://blog.darkpan.com/
 
 # License
 
-Copyright 2020 Marco Fontani <MFONTANI@cpan.org>
+Copyright 2020-2021 Marco Fontani <MFONTANI@cpan.org>
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
