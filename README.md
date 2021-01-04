@@ -4,7 +4,7 @@
 
 This repository contains a `Dockerfile.alpine`, which is used to create/build a
 `alpine`-based docker image which is then published via github actions to the
-docker hub, at [mfontani/buzz](https://hub.docker.com/r/mfontani/buzz)
+docker hub, at [mfontani/buzz](https://hub.docker.com/r/mfontani/buzz).
 
 The image is fairly lean, and it contains Just Enough for allowing a user to
 perform common CI/CD operations, like using `curl` to fetch or trigger
@@ -31,7 +31,7 @@ Additionally, the `Dockerfile.goalpine` contains a similar image, but based on
 the most recent `golang:*-alpine`. In addition to `muffle-env`, this image also
 includes useful packages used to build static golang binaries.
 This is also published via github actions to the docker hub at
-[mfontani/gobuzz](https://hub.docker.com/r/mfontani/gobuzz)
+[mfontani/gobuzz](https://hub.docker.com/r/mfontani/gobuzz).
 
 
 # Author
