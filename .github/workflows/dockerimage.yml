@@ -16,7 +16,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ hashFiles('**/Dockerfile.*') }}
+          key: ${{ runner.os }}-buildx-${{ hashFiles('**/Dockerfile.*', '**/muffle-env') }}
           restore-keys: |
             ${{ runner.os }}-buildx-
       - name: log in to docker hub
