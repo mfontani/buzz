@@ -3,8 +3,8 @@
 ... is the sound a [drone](https://drone.io/) makes.
 
 This repository contains a `Dockerfile.alpine`, which is used to create/build a
-`alpine`-based docker image which is then published via github actions to the
-docker hub, at [mfontani/buzz](https://hub.docker.com/r/mfontani/buzz).
+`alpine:latest`-based docker image which is then published via github actions to
+the docker hub, at [mfontani/buzz](https://hub.docker.com/r/mfontani/buzz).
 
 The image is fairly lean, and it contains Just Enough for allowing a user to
 perform common CI/CD operations, like using `curl` to fetch or trigger
