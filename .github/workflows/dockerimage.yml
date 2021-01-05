@@ -32,7 +32,10 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: mfontani/buzz:latest
-          cache-from: type=local,src=/tmp/.buildx-cache
+          build-args: BUILDKIT_INLINE_CACHE=1
+          cache-from: |
+            mfontani/buzz:latest
+            type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: build and push the gobuzz alpine image
         uses: docker/build-push-action@v2
@@ -42,7 +45,10 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: mfontani/gobuzz:latest
-          cache-from: type=local,src=/tmp/.buildx-cache
+          build-args: BUILDKIT_INLINE_CACHE=1
+          cache-from: |
+            mfontani/gobuzz:latest
+            type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       # - name: Build the buzz alpine image
       #   #run: docker build --file ./Dockerfile.alpine --tag ghcr.io/mfontani/buzz/alpine .
