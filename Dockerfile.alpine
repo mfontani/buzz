@@ -7,6 +7,7 @@ COPY ./muffle-env /bin/muffle-env
 RUN chmod +x /bin/muffle-env && \
     apk --no-cache add \
         ca-certificates=20191127-r4 \
+        xz=5.2.5-r0 \
         curl=7.69.1-r3 \
         git=2.26.2-r0 \
         openssh-client=8.3_p1-r1 \
