@@ -1,6 +1,6 @@
 # vim: set filetype=dockerfile :
 # docker inspect --format='{{index .RepoDigests 0}}' golang:1.16-alpine
-FROM golang@sha256:62873a931c1356454132db89e8b470d3baf39e8f86886323da009ff00ab9ccb5
+FROM golang@sha256:6c35b28ceee082c621c818c097f418cd55104a16e51003120c1bf37111ed9cfe
 
 COPY ./muffle-env /bin/muffle-env
 
