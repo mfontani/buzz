@@ -9,13 +9,13 @@ RUN chmod +x /bin/muffle-env && \
         ca-certificates=20191127-r5 \
         xz=5.2.5-r0 \
         curl=7.77.0-r1 \
-        gcc=10.2.1_pre1-r3 \
-        git=2.30.2-r0 \
-        musl-dev=1.2.2-r1 \
-        openssh-client=8.4_p1-r3 \
-        perl=5.32.0-r0 \
-        rsync=3.2.3-r1 \
-        util-linux-dev=2.36.1-r1 \
+        gcc=10.3.1_git20210424-r2 \
+        git=2.32.0-r0 \
+        musl-dev=1.2.2-r3 \
+        openssh-client-default=8.6_p1-r2 \
+        perl=5.32.1-r0 \
+        rsync=3.2.3-r2 \
+        util-linux-dev=2.37-r0 \
     && rm -rf /var/cache/apk/*
 
 ENTRYPOINT ["/bin/sh"]
