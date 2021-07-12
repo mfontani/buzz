@@ -1,6 +1,6 @@
 # vim: set filetype=dockerfile :
 # docker inspect --format='{{index .RepoDigests 0}}' alpine:latest
-FROM alpine@sha256:69e70a79f2d41ab5d637de98c1e0b055206ba40a8145e7bddb55ccc04e13cf8f
+FROM alpine@sha256:234cb88d3020898631af0ccbbcca9a66ae7306ecd30c9720690858c1b007d2a0
 
 COPY ./muffle-env /bin/muffle-env
 
@@ -8,7 +8,7 @@ RUN chmod +x /bin/muffle-env && \
     apk --no-cache add \
         ca-certificates=20191127-r5 \
         xz=5.2.5-r0 \
-        curl=7.77.0-r0 \
+        curl=7.77.0-r1 \
         git=2.30.2-r0 \
         openssh-client=8.4_p1-r3 \
         perl=5.32.0-r0 \

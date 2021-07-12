@@ -1,6 +1,6 @@
 # vim: set filetype=dockerfile :
 # docker inspect --format='{{index .RepoDigests 0}}' golang:1.16-alpine
-FROM golang@sha256:d312fd160b846cc88569468416d6786dc882cf78dc7157a66f6e3a72b05df06f
+FROM golang@sha256:3361eb3ffa949cf0cf60c13778697183a22684e0a0a5edf9ccb9d2f1ae4da873
 
 COPY ./muffle-env /bin/muffle-env
 
@@ -8,7 +8,7 @@ RUN chmod +x /bin/muffle-env && \
     apk --no-cache add \
         ca-certificates=20191127-r5 \
         xz=5.2.5-r0 \
-        curl=7.77.0-r0 \
+        curl=7.77.0-r1 \
         gcc=10.2.1_pre1-r3 \
         git=2.30.2-r0 \
         musl-dev=1.2.2-r1 \
