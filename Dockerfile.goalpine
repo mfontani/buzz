@@ -1,6 +1,6 @@
 # vim: set filetype=dockerfile :
 # docker inspect --format='{{index .RepoDigests 0}}' golang:1.17-alpine
-FROM golang@sha256:c2335038e2230960f81cb2f9f1fc5eca45e23b765de1848c7bbfaebcfd32d90d
+FROM golang@sha256:4918412049183afe42f1ecaf8f5c2a88917c2eab153ce5ecf4bf2d55c1507b74
 
 COPY ./muffle-env /bin/muffle-env
 
@@ -15,7 +15,7 @@ RUN chmod +x /bin/muffle-env && \
         openssh-client-default=8.6_p1-r3 \
         perl=5.32.1-r0 \
         rsync=3.2.3-r4 \
-        util-linux-dev=2.37-r0 \
+        util-linux-dev=2.37.2-r0 \
     && rm -rf /var/cache/apk/*
 
 ENTRYPOINT ["/bin/sh"]
