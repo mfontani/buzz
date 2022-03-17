@@ -1,6 +1,6 @@
 # vim: set filetype=dockerfile :
 # docker inspect --format='{{index .RepoDigests 0}}' alpine:latest
-FROM alpine@sha256:21a3deaa0d32a8057914f36584b5288d2e5ecc984380bc0118285c70fa8c9300
+FROM alpine@sha256:bbba0862badb4b50d1e2859de44c54c68856d022beca16fec713c810e46151e7
 
 COPY ./muffle-env /bin/muffle-env
 
