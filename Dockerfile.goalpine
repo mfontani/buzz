@@ -1,21 +1,21 @@
 # vim: set filetype=dockerfile :
-# docker inspect --format='{{index .RepoDigests 0}}' golang:1.18-alpine
-FROM golang@sha256:46f1fa18ca1ec228f7ea4978ad717f0a8c5e51436e7b8efaf64011f7729886df
+# docker inspect --format='{{index .RepoDigests 0}}' golang:1.19-alpine
+FROM golang@sha256:2381c1e5f8350a901597d633b2e517775eeac7a6682be39225a93b22cfd0f8bb
 
 COPY ./muffle-env /bin/muffle-env
 
 RUN chmod +x /bin/muffle-env && \
     apk --no-cache add \
-        ca-certificates=20211220-r0 \
-        xz=5.2.5-r1 \
-        curl=7.83.1-r2 \
-        gcc=11.2.1_git20220219-r2 \
-        git=2.36.2-r0 \
-        musl-dev=1.2.3-r0 \
-        openssh-client-default=9.0_p1-r1 \
-        perl=5.34.1-r0 \
-        rsync=3.2.4-r0 \
-        util-linux-dev=2.38-r1 \
+        ca-certificates=20220614-r4 $(: pkg-latest alpine v3.17 main x86_64 ) \
+        xz=5.2.9-r0 $(: pkg-latest alpine v3.17 main x86_64 ) \
+        curl=7.87.0-r1 $(: pkg-latest alpine v3.17 main x86_64 ) \
+        gcc=12.2.1_git20220924-r4 $(: pkg-latest alpine v3.17 main x86_64 ) \
+        git=2.38.3-r1 $(: pkg-latest alpine v3.17 main x86_64 ) \
+        musl-dev=1.2.3-r4 $(: pkg-latest alpine v3.17 main x86_64 ) \
+        openssh-client-default=9.1_p1-r1 $(: pkg-latest alpine v3.17 main x86_64 ) \
+        perl=5.36.0-r0 $(: pkg-latest alpine v3.17 main x86_64 ) \
+        rsync=3.2.7-r0 $(: pkg-latest alpine v3.17 main x86_64 ) \
+        util-linux-dev=2.38.1-r1 $(: pkg-latest alpine v3.17 main x86_64 ) \
     && rm -rf /var/cache/apk/*
 
 ENTRYPOINT ["/bin/sh"]

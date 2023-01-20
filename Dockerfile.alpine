@@ -1,18 +1,18 @@
 # vim: set filetype=dockerfile :
-# docker inspect --format='{{index .RepoDigests 0}}' alpine:latest
-FROM alpine@sha256:686d8c9dfa6f3ccfc8230bc3178d23f84eeaf7e457f36f271ab1acc53015037c
+# docker inspect --format='{{index .RepoDigests 0}}' alpine:3.17
+FROM alpine@sha256:f271e74b17ced29b915d351685fd4644785c6d1559dd1f2d4189a5e851ef753a
 
 COPY ./muffle-env /bin/muffle-env
 
 RUN chmod +x /bin/muffle-env && \
     apk --no-cache add \
-        ca-certificates=20211220-r0 \
-        xz=5.2.5-r1 \
-        curl=7.83.1-r2 \
-        git=2.36.2-r0 \
-        openssh-client-default=9.0_p1-r1 \
-        perl=5.34.1-r0 \
-        rsync=3.2.4-r0 \
+        ca-certificates=20220614-r4 $(: pkg-latest alpine v3.17 main x86_64 ) \
+        xz=5.2.9-r0 $(: pkg-latest alpine v3.17 main x86_64 ) \
+        curl=7.87.0-r1 $(: pkg-latest alpine v3.17 main x86_64 ) \
+        git=2.38.3-r1 $(: pkg-latest alpine v3.17 main x86_64 ) \
+        openssh-client-default=9.1_p1-r1 $(: pkg-latest alpine v3.17 main x86_64 ) \
+        perl=5.36.0-r0 $(: pkg-latest alpine v3.17 main x86_64 ) \
+        rsync=3.2.7-r0 $(: pkg-latest alpine v3.17 main x86_64 ) \
         && rm -rf /var/cache/apk/*
 
 ENTRYPOINT ["/bin/sh"]
