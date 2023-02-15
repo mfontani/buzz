@@ -1,6 +1,6 @@
 # vim: set filetype=dockerfile :
 # docker inspect --format='{{index .RepoDigests 0}}' golang:1.20-alpine
-FROM golang@sha256:0d145ecb3cb3772ee54d3a97ae2774aa4f8a179f28f9d4ea67b9cb38b58acebd
+FROM golang@sha256:48f336ef8366b9d6246293e3047259d0f614ee167db1869bdbc343d6e09aed8a
 
 COPY ./muffle-env /bin/muffle-env
 
@@ -10,7 +10,7 @@ RUN chmod +x /bin/muffle-env && \
         xz=5.2.9-r0 $(: pkg-latest alpine v3.17 main x86_64 ) \
         curl=7.87.0-r1 $(: pkg-latest alpine v3.17 main x86_64 ) \
         gcc=12.2.1_git20220924-r4 $(: pkg-latest alpine v3.17 main x86_64 ) \
-        git=2.38.3-r1 $(: pkg-latest alpine v3.17 main x86_64 ) \
+        git=2.38.4-r0 $(: pkg-latest alpine v3.17 main x86_64 ) \
         musl-dev=1.2.3-r4 $(: pkg-latest alpine v3.17 main x86_64 ) \
         openssh-client-default=9.1_p1-r2 $(: pkg-latest alpine v3.17 main x86_64 ) \
         perl=5.36.0-r0 $(: pkg-latest alpine v3.17 main x86_64 ) \
